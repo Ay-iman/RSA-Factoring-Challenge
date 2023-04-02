@@ -1,0 +1,30 @@
+import sys
+
+def factorize(n):
+    """
+    Factorize a natural number n into two smaller factors.
+    """
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return i, n//i
+    return None
+
+if __name__ == '__main__':
+    # Get the input file path from the command-line argument
+    if len(sys.argv) < 2:
+        print('Usage: factors <file>')
+        sys.exit(1)
+    input_file = sys.argv[1]
+
+    # Process each line of the input file
+    with open(input_file, 'r') as f:
+        for line in f:
+            # Convert the line to an integer
+            n = int(line.strip())
+
+            # Factorize the number and print the result
+            factors = factorize(n)
+            if factors is not None:
+                p, q = factors
+                print('{}={}*{}'.format(n, p, q))
+
